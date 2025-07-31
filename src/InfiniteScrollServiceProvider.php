@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Codelabmw\InfiniteScroll;
 
 use Illuminate\Support\ServiceProvider;
-use Inertia\Inertia;
 
 final class InfiniteScrollServiceProvider extends ServiceProvider
 {
@@ -14,7 +13,7 @@ final class InfiniteScrollServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind('infinite-scroll', fn() => new InfiniteScroll());
+        $this->app->bind('infinite-scroll', fn (): InfiniteScroll => new InfiniteScroll());
     }
 
     /**

@@ -1,17 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 use Codelabmw\InfiniteScroll\Enums\PaginationType;
 use Codelabmw\InfiniteScroll\Facades\InfiniteScroll;
 use Codelabmw\Tests\Fixtures\TestModel;
 use Inertia\DeferProp;
 
-beforeEach(function () {
+beforeEach(function (): void {
     // Arrange
     TestModel::factory()->count(20)->create();
-})->only();
+});
 
-
-test('returns cursor pagination data given query', function () {
+test('returns cursor pagination data given query', function (): void {
     // Act
     $result = InfiniteScroll::make('test', TestModel::query());
 
@@ -25,7 +26,7 @@ test('returns cursor pagination data given query', function () {
     expect($result['perPage']())->toBeInt();
 });
 
-test('returns cursor pagination data given cursor object', function () {
+test('returns cursor pagination data given cursor object', function (): void {
     // Act
     $result = InfiniteScroll::make('test', TestModel::query()->cursorPaginate());
 
@@ -39,7 +40,7 @@ test('returns cursor pagination data given cursor object', function () {
     expect($result['perPage']())->toBeInt();
 });
 
-test('returns pagination data given a pagination object', function () {
+test('returns pagination data given a pagination object', function (): void {
     // Act
     $result = InfiniteScroll::make('test', TestModel::query()->paginate());
 
@@ -53,7 +54,7 @@ test('returns pagination data given a pagination object', function () {
     expect($result['perPage']())->toBeInt();
 });
 
-test('returns pagination data given a simple pagination object', function () {
+test('returns pagination data given a simple pagination object', function (): void {
     // Act
     $result = InfiniteScroll::make('test', TestModel::query()->simplePaginate());
 
