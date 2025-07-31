@@ -14,7 +14,8 @@
     ],
     "autoload": {
         "psr-4": {
-            "Codelabmw\\InfiniteScroll\\": "src/"
+            "Codelabmw\\InfiniteScroll\\": "src/",
+            "Codelabmw\\InfiniteScroll\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
@@ -51,7 +52,9 @@
             "providers": [
                 "Codelabmw\\InfiniteScroll\\InfiniteScrollServiceProvider"
             ],
-            "aliases": {}
+            "aliases": {
+                "InfiniteScroll": "Codelabmw\\InfiniteScroll\\Facades\\InfiniteScroll"
+            }
         }
     },
     "scripts": {

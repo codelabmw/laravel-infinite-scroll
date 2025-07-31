@@ -5,17 +5,16 @@ declare(strict_types=1);
 namespace Codelabmw\InfiniteScroll;
 
 use Illuminate\Support\ServiceProvider;
-use Override;
+use Inertia\Inertia;
 
 final class InfiniteScrollServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
      */
-    #[Override]
     public function register(): void
     {
-        //
+        $this->app->bind('infinite-scroll', fn() => new InfiniteScroll());
     }
 
     /**
