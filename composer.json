@@ -1,0 +1,75 @@
+{
+    "name": "codelabmw/laravel-package-skeleton",
+    "description": "A minimal template repository for Codelab's headless Laravel packages.",
+    "keywords": [
+        "laravel"
+    ],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Chikondi Kamwendo",
+            "email": "kondie208@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Codelabmw\\LaravelPackageSkeleton\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Codelabmw\\Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "php": "^8.3",
+        "illuminate/support": "^11.43"
+    },
+    "require-dev": {
+        "larastan/larastan": "^3.0",
+        "laravel/pint": "^1.21",
+        "orchestra/testbench": "^9.11",
+        "peckphp/peck": "^0.1.2",
+        "pestphp/pest": "^3.7",
+        "pestphp/pest-plugin-arch": "^3.0",
+        "pestphp/pest-plugin-type-coverage": "^3.3",
+        "phpstan/phpstan": "^2.1",
+        "rector/rector": "^2.0"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true,
+        "preferred-install": "dist",
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Codelabmw\\LaravelPackageSkeleton\\PackageServiceProvider"
+            ],
+            "aliases": {}
+        }
+    },
+    "scripts": {
+        "lint": "pint",
+        "refactor": "rector",
+        "test:type-coverage": "pest --type-coverage --min=100",
+        "test:typos": "peck",
+        "test:lint": "pint --test",
+        "test:unit": "pest --coverage --exactly=100",
+        "test:types": "phpstan",
+        "test:refactor": "rector --dry-run",
+        "test": [
+            "@test:lint",
+            "@test:refactor",
+            "@test:types",
+            "@test:typos",
+            "@test:type-coverage",
+            "@test:unit"
+        ]
+    }
+}
