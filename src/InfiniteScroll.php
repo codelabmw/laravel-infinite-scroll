@@ -20,27 +20,27 @@ final class InfiniteScroll
      *
      * @phpstan-ignore-next-line missingType.generics
      */
-    public function make(string $key, Builder|CursorPaginator|Paginator $paginator, int $perPage = 15, array $columns = ['*']): array
+    public function make(string $key, Builder|CursorPaginator|Paginator $data, int $perPage = 15, array $columns = ['*']): array
     {
-        if ($paginator instanceof Paginator) {
+        if ($data instanceof Paginator) {
             return [
-                $key => Inertia::defer(fn () => $paginator->items())->deepMerge(),
+                $key => Inertia::defer(fn () => $data)->deepMerge(),
                 'type' => fn (): PaginationType => PaginationType::PAGED,
-                'page' => fn () => $paginator->currentPage(),
-                'hasMore' => fn () => $paginator->hasMorePages(),
+                'page' => fn () => $data->currentPage(),
+                'hasMore' => fn () => $data->hasMorePages(),
                 'perPage' => fn (): int => $perPage,
             ];
         }
 
-        if ($paginator instanceof Builder) {
-            $paginator = $paginator->cursorPaginate(perPage: $perPage, columns: $columns);
+        if ($data instanceof Builder) {
+            $data = $data->cursorPaginate(perPage: $perPage, columns: $columns);
         }
 
         return [
-            $key => Inertia::defer(fn () => $paginator->items())->deepMerge(),
+            $key => Inertia::defer(fn () => $data)->deepMerge(),
             'type' => fn (): PaginationType => PaginationType::CURSOR,
-            'cursor' => fn () => $paginator->nextCursor()?->encode(),
-            'hasMore' => fn () => $paginator->hasMorePages(), // @phpstan-ignore-line method.notFound
+            'cursor' => fn () => $data->nextCursor()?->encode(),
+            'hasMore' => fn () => $data->hasMorePages(), // @phpstan-ignore-line method.notFound
             'perPage' => fn (): int => $perPage,
         ];
     }

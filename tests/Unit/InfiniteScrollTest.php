@@ -40,6 +40,14 @@ test('returns cursor pagination data given cursor object', function (): void {
     expect($result['perPage']())->toBeInt();
 });
 
+test('determines if cursor pagination has more pages', function (): void {
+    // Act
+    $result = InfiniteScroll::make('test', TestModel::query(), 20);
+
+    // Assert
+    expect($result['hasMore']())->toBeFalse();
+});
+
 test('returns pagination data given a pagination object', function (): void {
     // Act
     $result = InfiniteScroll::make('test', TestModel::query()->paginate());
@@ -66,4 +74,12 @@ test('returns pagination data given a simple pagination object', function (): vo
     expect($result['page']())->toBeInt();
     expect($result['hasMore']())->toBeTrue();
     expect($result['perPage']())->toBeInt();
+});
+
+test('determines if pagination has more pages', function () {
+    // Act
+    $result = InfiniteScroll::make('test', TestModel::query()->paginate(perPage: 20));
+
+    // Assert
+    expect($result['hasMore']())->toBeFalse();
 });
