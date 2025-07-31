@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Codelabmw\Tests;
 
-use Codelabmw\LaravelPackageSkeleton\PackageServiceProvider;
+use Codelabmw\InfiniteScroll\InfiniteScrollServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
@@ -28,7 +28,7 @@ class TestCase extends Orchestra
     protected function getPackageProviders($app)
     {
         return [
-            PackageServiceProvider::class,
+            InfiniteScrollServiceProvider::class,
         ];
     }
 }

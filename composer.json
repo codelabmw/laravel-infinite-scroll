@@ -1,6 +1,6 @@
 {
-    "name": "codelabmw/laravel-package-skeleton",
-    "description": "A minimal template repository for Codelab's headless Laravel packages.",
+    "name": "codelabmw/laravel-infinite-scroll",
+    "description": "A Laravel package for easily implementing infinite scroll in your applications.",
     "keywords": [
         "laravel"
     ],
@@ -14,7 +14,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Codelabmw\\LaravelPackageSkeleton\\": "src/"
+            "Codelabmw\\InfiniteScroll\\": "src/"
         }
     },
     "autoload-dev": {
@@ -24,20 +24,19 @@
     },
     "require": {
         "php": "^8.3",
-        "illuminate/support": "^11.43"
+        "illuminate/support": "11.* || 12.*"
     },
     "require-dev": {
-        "larastan/larastan": "^3.0",
-        "laravel/pint": "^1.21",
-        "orchestra/testbench": "^9.11",
-        "peckphp/peck": "^0.1.2",
-        "pestphp/pest": "^3.7",
-        "pestphp/pest-plugin-arch": "^3.0",
-        "pestphp/pest-plugin-type-coverage": "^3.3",
-        "phpstan/phpstan": "^2.1",
-        "rector/rector": "^2.0"
+        "larastan/larastan": "^3.6",
+        "laravel/pint": "^1.24",
+        "orchestra/testbench": "^9.14",
+        "pestphp/pest": "^3.8.2",
+        "pestphp/pest-plugin-arch": "^3.1.1",
+        "pestphp/pest-plugin-type-coverage": "^3.6.1",
+        "phpstan/phpstan": "^2.1.21",
+        "rector/rector": "^2.1.2"
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true,
     "config": {
         "sort-packages": true,
@@ -49,7 +48,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Codelabmw\\LaravelPackageSkeleton\\PackageServiceProvider"
+                "Codelabmw\\InfiniteScroll\\InfiniteScrollServiceProvider"
             ],
             "aliases": {}
         }
@@ -58,7 +57,6 @@
         "lint": "pint",
         "refactor": "rector",
         "test:type-coverage": "pest --type-coverage --min=100",
-        "test:typos": "peck",
         "test:lint": "pint --test",
         "test:unit": "pest --coverage --exactly=100",
         "test:types": "phpstan",
@@ -67,7 +65,6 @@
             "@test:lint",
             "@test:refactor",
             "@test:types",
-            "@test:typos",
             "@test:type-coverage",
             "@test:unit"
         ]

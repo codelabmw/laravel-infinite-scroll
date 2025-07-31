@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Codelabmw\LaravelPackageSkeleton;
+namespace Codelabmw\InfiniteScroll;
 
 use Illuminate\Support\ServiceProvider;
 use Override;
 
-final class PackageServiceProvider extends ServiceProvider
+final class InfiniteScrollServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
