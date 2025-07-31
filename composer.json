@@ -1,6 +1,6 @@
 {
     "name": "codelabmw/laravel-infinite-scroll",
-    "description": "A Laravel package for easily implementing infinite scroll in your applications.",
+    "description": "A Laravel package for easily implementing infinite scroll in your inertia applications.",
     "keywords": [
         "laravel"
     ],
