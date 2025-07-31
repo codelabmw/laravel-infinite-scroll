@@ -24,7 +24,7 @@ final class InfiniteScroll
     {
         if ($data instanceof Paginator) {
             return [
-                $key => Inertia::defer(fn () => $data)->deepMerge(),
+                $key => Inertia::defer(fn (): Paginator => $data)->deepMerge(),
                 'type' => fn (): PaginationType => PaginationType::PAGED,
                 'page' => fn () => $data->currentPage(),
                 'hasMore' => fn () => $data->hasMorePages(),

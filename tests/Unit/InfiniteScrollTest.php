@@ -76,7 +76,7 @@ test('returns pagination data given a simple pagination object', function (): vo
     expect($result['perPage']())->toBeInt();
 });
 
-test('determines if pagination has more pages', function () {
+test('determines if pagination has more pages', function (): void {
     // Act
     $result = InfiniteScroll::make('test', TestModel::query()->paginate(perPage: 20));
 
