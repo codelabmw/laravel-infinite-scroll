@@ -1,5 +1,6 @@
 <?php
 
+use Codelabmw\InfiniteScroll\Enums\PaginationType;
 use Codelabmw\InfiniteScroll\Facades\InfiniteScroll;
 use Codelabmw\Tests\Fixtures\TestModel;
 use Inertia\DeferProp;
@@ -16,8 +17,9 @@ test('returns cursor pagination data given query', function () {
 
     // Assert
     expect($result)->toBeArray();
-    expect(array_keys($result))->toEqual(['test', 'cursor', 'hasMore', 'perPage']);
+    expect(array_keys($result))->toEqual(['test', 'type', 'cursor', 'hasMore', 'perPage']);
     expect($result['test'])->toBeInstanceOf(DeferProp::class);
+    expect($result['type']())->toBeInstanceOf(PaginationType::class);
     expect($result['cursor']())->toBeString();
     expect($result['hasMore']())->toBeTrue();
     expect($result['perPage']())->toBeInt();
@@ -29,8 +31,9 @@ test('returns cursor pagination data given cursor object', function () {
 
     // Assert
     expect($result)->toBeArray();
-    expect(array_keys($result))->toEqual(['test', 'cursor', 'hasMore', 'perPage']);
+    expect(array_keys($result))->toEqual(['test', 'type', 'cursor', 'hasMore', 'perPage']);
     expect($result['test'])->toBeInstanceOf(DeferProp::class);
+    expect($result['type']())->toBeInstanceOf(PaginationType::class);
     expect($result['cursor']())->toBeString();
     expect($result['hasMore']())->toBeTrue();
     expect($result['perPage']())->toBeInt();
@@ -42,8 +45,9 @@ test('returns pagination data given a pagination object', function () {
 
     // Assert
     expect($result)->toBeArray();
-    expect(array_keys($result))->toEqual(['test', 'page', 'hasMore', 'perPage']);
+    expect(array_keys($result))->toEqual(['test', 'type', 'page', 'hasMore', 'perPage']);
     expect($result['test'])->toBeInstanceOf(DeferProp::class);
+    expect($result['type']())->toBeInstanceOf(PaginationType::class);
     expect($result['page']())->toBeInt();
     expect($result['hasMore']())->toBeTrue();
     expect($result['perPage']())->toBeInt();
@@ -55,8 +59,9 @@ test('returns pagination data given a simple pagination object', function () {
 
     // Assert
     expect($result)->toBeArray();
-    expect(array_keys($result))->toEqual(['test', 'page', 'hasMore', 'perPage']);
+    expect(array_keys($result))->toEqual(['test', 'type', 'page', 'hasMore', 'perPage']);
     expect($result['test'])->toBeInstanceOf(DeferProp::class);
+    expect($result['type']())->toBeInstanceOf(PaginationType::class);
     expect($result['page']())->toBeInt();
     expect($result['hasMore']())->toBeTrue();
     expect($result['perPage']())->toBeInt();

@@ -6,6 +6,7 @@ use Illuminate\Contracts\Pagination\CursorPaginator;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Builder;
 use Inertia\Inertia;
+use Codelabmw\InfiniteScroll\Enums\PaginationType;
 
 class InfiniteScroll
 {
@@ -24,6 +25,7 @@ class InfiniteScroll
         if ($paginator instanceof Paginator) {
             return [
                 $key => Inertia::defer(fn() => $paginator->items())->deepMerge(),
+                'type' => fn() => PaginationType::PAGED,
                 'page' => fn() => $paginator->currentPage(),
                 'hasMore' => fn() => $paginator->hasMorePages(),
                 'perPage' => fn() => $perPage,
@@ -36,6 +38,7 @@ class InfiniteScroll
 
         return [
             $key => Inertia::defer(fn() => $paginator->items())->deepMerge(),
+            'type' => fn() => PaginationType::CURSOR,
             'cursor' => fn() => $paginator->nextCursor()?->encode(),
             'hasMore' => fn() => $paginator->hasMorePages(),
             'perPage' => fn() => $perPage,
