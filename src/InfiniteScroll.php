@@ -27,8 +27,8 @@ final class InfiniteScroll
                 $key => Inertia::defer(fn (): Paginator => $data)->deepMerge(),
                 'type' => fn (): PaginationType => PaginationType::PAGED,
                 'page' => fn () => $data->currentPage(),
-                'hasMore' => fn () => $data->hasMorePages(),
-                'perPage' => fn (): int => $perPage,
+                'has_more' => fn () => $data->hasMorePages(),
+                'per_page' => fn (): int => $perPage,
             ];
         }
 
@@ -40,8 +40,8 @@ final class InfiniteScroll
             $key => Inertia::defer(fn () => $data)->deepMerge(),
             'type' => fn (): PaginationType => PaginationType::CURSOR,
             'cursor' => fn () => $data->nextCursor()?->encode(),
-            'hasMore' => fn () => $data->hasMorePages(), // @phpstan-ignore-line method.notFound
-            'perPage' => fn (): int => $perPage,
+            'has_more' => fn () => $data->hasMorePages(), // @phpstan-ignore-line method.notFound
+            'per_page' => fn (): int => $perPage,
         ];
     }
 }

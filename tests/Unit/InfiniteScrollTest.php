@@ -18,12 +18,12 @@ test('returns cursor pagination data given query', function (): void {
 
     // Assert
     expect($result)->toBeArray();
-    expect(array_keys($result))->toEqual(['test', 'type', 'cursor', 'hasMore', 'perPage']);
+    expect(array_keys($result))->toEqual(['test', 'type', 'cursor', 'has_more', 'per_page']);
     expect($result['test'])->toBeInstanceOf(DeferProp::class);
     expect($result['type']())->toBeInstanceOf(PaginationType::class);
     expect($result['cursor']())->toBeString();
-    expect($result['hasMore']())->toBeTrue();
-    expect($result['perPage']())->toBeInt();
+    expect($result['has_more']())->toBeTrue();
+    expect($result['per_page']())->toBeInt();
 });
 
 test('returns cursor pagination data given cursor object', function (): void {
@@ -32,12 +32,12 @@ test('returns cursor pagination data given cursor object', function (): void {
 
     // Assert
     expect($result)->toBeArray();
-    expect(array_keys($result))->toEqual(['test', 'type', 'cursor', 'hasMore', 'perPage']);
+    expect(array_keys($result))->toEqual(['test', 'type', 'cursor', 'has_more', 'per_page']);
     expect($result['test'])->toBeInstanceOf(DeferProp::class);
     expect($result['type']())->toBeInstanceOf(PaginationType::class);
     expect($result['cursor']())->toBeString();
-    expect($result['hasMore']())->toBeTrue();
-    expect($result['perPage']())->toBeInt();
+    expect($result['has_more']())->toBeTrue();
+    expect($result['per_page']())->toBeInt();
 });
 
 test('determines if cursor pagination has more pages', function (): void {
@@ -45,7 +45,7 @@ test('determines if cursor pagination has more pages', function (): void {
     $result = InfiniteScroll::make('test', TestModel::query(), 20);
 
     // Assert
-    expect($result['hasMore']())->toBeFalse();
+    expect($result['has_more']())->toBeFalse();
 });
 
 test('returns pagination data given a pagination object', function (): void {
@@ -54,12 +54,12 @@ test('returns pagination data given a pagination object', function (): void {
 
     // Assert
     expect($result)->toBeArray();
-    expect(array_keys($result))->toEqual(['test', 'type', 'page', 'hasMore', 'perPage']);
+    expect(array_keys($result))->toEqual(['test', 'type', 'page', 'has_more', 'per_page']);
     expect($result['test'])->toBeInstanceOf(DeferProp::class);
     expect($result['type']())->toBeInstanceOf(PaginationType::class);
     expect($result['page']())->toBeInt();
-    expect($result['hasMore']())->toBeTrue();
-    expect($result['perPage']())->toBeInt();
+    expect($result['has_more']())->toBeTrue();
+    expect($result['per_page']())->toBeInt();
 });
 
 test('returns pagination data given a simple pagination object', function (): void {
@@ -68,12 +68,12 @@ test('returns pagination data given a simple pagination object', function (): vo
 
     // Assert
     expect($result)->toBeArray();
-    expect(array_keys($result))->toEqual(['test', 'type', 'page', 'hasMore', 'perPage']);
+    expect(array_keys($result))->toEqual(['test', 'type', 'page', 'has_more', 'per_page']);
     expect($result['test'])->toBeInstanceOf(DeferProp::class);
     expect($result['type']())->toBeInstanceOf(PaginationType::class);
     expect($result['page']())->toBeInt();
-    expect($result['hasMore']())->toBeTrue();
-    expect($result['perPage']())->toBeInt();
+    expect($result['has_more']())->toBeTrue();
+    expect($result['per_page']())->toBeInt();
 });
 
 test('determines if pagination has more pages', function (): void {
@@ -81,5 +81,5 @@ test('determines if pagination has more pages', function (): void {
     $result = InfiniteScroll::make('test', TestModel::query()->paginate(perPage: 20));
 
     // Assert
-    expect($result['hasMore']())->toBeFalse();
+    expect($result['has_more']())->toBeFalse();
 });
