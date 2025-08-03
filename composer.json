@@ -26,7 +26,8 @@
     "require": {
         "php": "^8.3",
         "illuminate/support": "11.* || 12.*",
-        "inertiajs/inertia-laravel": "^2.0"
+        "inertiajs/inertia-laravel": "^2.0",
+        "laravel/prompts": "^0.3.6"
     },
     "require-dev": {
         "larastan/larastan": "^3.6",
