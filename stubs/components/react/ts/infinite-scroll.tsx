@@ -10,14 +10,14 @@ interface InfiniteScrollProps {
 
 type PageProps = {
     type: 'cursor' | 'paged';
-    perPage: number;
-    hasMore: boolean;
+    per_page: number;
+    has_more: boolean;
     cursor?: string;
     page?: number;
 };
 
 type Payload = {
-    perPage: number;
+    per_page: number;
     cursor?: string;
     page?: number;
 };
@@ -32,8 +32,8 @@ type Payload = {
  */
 function InfiniteScroll({ children, data, whileLoading, whileNoMoreData }: InfiniteScrollProps) {
     const page = usePage<PageProps>().props;
-    const props: string[] = [data, 'type', 'perPage', 'hasMore'];
-    const payload: Payload = { perPage: page.perPage };
+    const props: string[] = [data, 'type', 'per_page', 'has_more'];
+    const payload: Payload = { per_page: page.per_page };
     const [loading, setLoading] = useState<boolean>(false);
 
     const loadData = () => {
@@ -61,7 +61,7 @@ function InfiniteScroll({ children, data, whileLoading, whileNoMoreData }: Infin
             <Deferred data={data} fallback={<>{whileLoading || <p className="text-center text-muted-foreground">Loading...</p>}</>}>
                 {loading ? (
                     <>{whileLoading || <p className="text-center text-muted-foreground">Loading...</p>}</>
-                ) : page.hasMore ? (
+                ) : page.has_more ? (
                     <WhenVisible onVisible={loadData} />
                 ) : (
                     <>{whileNoMoreData || <p className="text-center text-muted-foreground">No more data</p>}</>
