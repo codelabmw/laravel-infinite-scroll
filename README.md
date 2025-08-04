@@ -172,7 +172,7 @@ Publishes infinite scroll components of your chosen stack to your resources dire
 ### Stacks & Extensibility
 
 - **Stack detection:** The install command tries to auto-detect your current stack (e.g., React) and sets it as the default in the selection menu.
-- **Multiple stacks supported:** The package is designed to support any Inertia frontend stack. Each stack implementation is responsible for its own frontend component.
+- **Multiple stacks supported:** The package is designed to support any Inertia frontend stack. Each stack implementation is responsible for its own frontend components.
 - **Adding custom stacks:** You can extend the package by implementing the `Stack` contract and registering your stack and component. Community contributions for additional stacks (Vue, Svelte, etc.) are encouraged!
 
 ---
@@ -186,7 +186,7 @@ Publishes infinite scroll components of your chosen stack to your resources dire
   - A: Use component props (`whileLoading` | `whileNoMoreData`) to override default behavior.
   - A: Edit the published component in your resources directory or where you published it.
 - **Q: Does this work with other stacks?**
-  - A: Currently, only React components are supported out of the box. You can add other stacks by contributing to the package.
+  - A: Yes it does, however currently, only React components are included out of the box. You can add other stacks components by contributing to the package.
 
 ---
 
