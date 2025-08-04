@@ -2,18 +2,43 @@
 
 declare(strict_types=1);
 
+use Codelabmw\InfiniteScroll\Contracts\Stack;
 use Codelabmw\InfiniteScroll\Stacks\React;
 use Codelabmw\InfiniteScroll\Support\FileSystem;
 use Codelabmw\InfiniteScroll\SupportedStacks;
+use Illuminate\Support\Collection;
 
 beforeEach(function (): void {
     // Arrange
     $mock = Mockery::mock(new SupportedStacks());
     $mock->shouldReceive('get')->andReturn([
-        'React' => React::class,
+        React::class,
     ]);
 
     $this->app->bind(SupportedStacks::class, fn () => $mock);
+
+    $this->reactStack = new class implements Stack
+    {
+        public function getLabel(): string
+        {
+            return 'React';
+        }
+
+        public function isCurrent(): bool
+        {
+            return true;
+        }
+
+        public function getDefaultInstallationPath(): string
+        {
+            return 'resources/js/components';
+        }
+
+        public function getStubs(): Collection
+        {
+            return collect([]);
+        }
+    };
 
     $this->componentPath = FileSystem::tests('Fixtures/Storage/infinite-scroll.tsx');
 });
@@ -27,8 +52,7 @@ it('requires input', function (): void {
 
 it('aborts if stack has no stub files', function (): void {
     // Arrange
-    $mock = Mockery::mock(new React());
-    $mock->shouldReceive('getStubs')->andReturn(collect([]));
+    $mock = Mockery::mock($this->reactStack);
 
     $this->app->bind(React::class, fn () => $mock);
 
@@ -41,7 +65,7 @@ it('aborts if stack has no stub files', function (): void {
 
 it('aborts if stack has stub files that does not exists', function (): void {
     // Arrange
-    $mock = Mockery::mock(new React());
+    $mock = Mockery::mock($this->reactStack);
     $mock->shouldReceive('getStubs')->andReturn(collect([
         FileSystem::stubs('none-existent.file'),
     ]));
@@ -57,7 +81,7 @@ it('aborts if stack has stub files that does not exists', function (): void {
 
 it('installs proper files', function (): void {
     // Arrange
-    $mock = Mockery::mock(new React());
+    $mock = Mockery::mock($this->reactStack);
     $mock->shouldReceive('getStubs')->andReturn(collect([
         FileSystem::stubs('components/react/ts/infinite-scroll.tsx'),
     ]));

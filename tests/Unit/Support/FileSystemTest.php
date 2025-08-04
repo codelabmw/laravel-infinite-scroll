@@ -100,6 +100,18 @@ test('copy copies a file', function (): void {
     expect(file_get_contents($dest))->toBe('copy me');
 });
 
+test('getContents returns the contents of a file', function (): void {
+    // Arrange
+    $file = $this->tmpDir.'/test.txt';
+    file_put_contents($file, 'test');
+
+    // Act
+    $contents = FileSystem::getContents($file);
+
+    // Assert
+    expect($contents)->toBe('test');
+});
+
 test('stubs returns correct stubs path', function (): void {
     // Arrange
     // No setup needed

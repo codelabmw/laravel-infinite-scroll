@@ -24,4 +24,9 @@ interface Stack
      * @return Collection<int, string>
      */
     public function getStubs(): Collection;
+
+    /**
+     * Whether this stack is the current one.
+     */
+    public function isCurrent(): bool;
 }

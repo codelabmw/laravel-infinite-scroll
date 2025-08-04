@@ -36,7 +36,7 @@ final class InstallCommand extends Command
     /**
      * List of registered supported stacks.
      *
-     * @var Collection<string, class-string<Stack>>
+     * @var Collection<string, Stack>
      */
     private readonly Collection $supportedStacks;
 
@@ -46,7 +46,13 @@ final class InstallCommand extends Command
     public function __construct(SupportedStacks $supportedStacksService)
     {
         parent::__construct();
-        $this->supportedStacks = collect($supportedStacksService->get());
+
+        $this->supportedStacks = collect($supportedStacksService->get())->mapWithKeys(function (string $stack): array {
+            /** @var Stack */
+            $stack = App::make($stack);
+
+            return [$stack->getLabel() => $stack];
+        });
     }
 
     /**
@@ -58,18 +64,24 @@ final class InstallCommand extends Command
         $stack = select(
             label: 'Which stack are you using?',
             options: $this->supportedStacks->keys(), // @phpstan-ignore-line
+            default: $this->supportedStacks->firstWhere(fn (Stack $stack): bool => $stack->isCurrent())?->getLabel(),
             required: true,
         );
 
         /** @var Stack */
-        $stack = App::make((string) $this->supportedStacks->get($stack));
+        $stack = $this->supportedStacks->get($stack);
 
-        // @phpstan-ignore-next-line
         $installationPath = text(
             label: 'Where do you want to install components?',
             placeholder: $stack->getDefaultInstallationPath(),
             required: false,
-        ) ?? $stack->getDefaultInstallationPath();
+        );
+
+        // @codeCoverageIgnoreStart
+        if ($installationPath === '') {
+            $installationPath = $stack->getDefaultInstallationPath();
+        }
+        // @codeCoverageIgnoreEnd
 
         $error = spin(fn (): ?string => $this->install($stack->getStubs(), $installationPath), 'Installing infinite scroll components for '.$stack->getLabel().' in '.$installationPath.'.');
 

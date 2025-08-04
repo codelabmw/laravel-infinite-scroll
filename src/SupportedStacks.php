@@ -10,12 +10,12 @@ use Codelabmw\InfiniteScroll\Stacks\React;
 class SupportedStacks
 {
     /**
-     * @return array<string, class-string<Stack>>
+     * @return array<int, class-string<Stack>>
      */
     public function get(): array
     {
         return [
-            'React' => React::class,
+            React::class,
         ];
     }
 }

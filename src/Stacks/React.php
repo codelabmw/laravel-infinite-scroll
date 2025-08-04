@@ -37,4 +37,30 @@ final class React implements Stack
             FileSystem::stubs('components/react/ts/infinite-scroll.tsx'),
         ]);
     }
+
+    /**
+     * Whether this stack is the current one.
+     */
+    public function isCurrent(): bool
+    {
+        $packageJsonPath = base_path('package.json');
+
+        if (! FileSystem::exists($packageJsonPath)) {
+            return false;
+        }
+
+        $json = json_decode((string) FileSystem::getContents($packageJsonPath), true);
+
+        if (! is_array($json)) {
+            return false;
+        }
+
+        /** @var array<string, string> */
+        $deps = $json['dependencies'] ?? [];
+
+        /** @var array<string, string> */
+        $devDeps = $json['devDependencies'] ?? [];
+
+        return isset($deps['@inertiajs/react']) || isset($devDeps['@inertiajs/react']);
+    }
 }

@@ -43,6 +43,14 @@ final class FileSystem
     }
 
     /**
+     * Returns the contents of a file.
+     */
+    public static function getContents(string $path): bool|string
+    {
+        return file_get_contents($path);
+    }
+
+    /**
      * Returns the path to the stubs directory.
      */
     public static function stubs(?string $path = null): string
