@@ -15,3 +15,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ### Changed
 
 - Updated author email
+
+## [1.0.2] - 2025-08-04
+
+### Fixed
+
+- Typos in react component stub
+
