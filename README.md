@@ -1,7 +1,7 @@
 <p align="center">
     <img src="art/package-art.png" alt="Art">
     <p align="center">
-        <a href="https://github.com/codelabmw/laravel-infinite-scroll/actions"><img alt="GitHub Workflow Status (master)" src="https://github.com/codelabmw/laravel-infinite-scroll/actions/workflows/run-tests.yml/badge.svg"></a>
+        <a href="https://github.com/codelabmw/laravel-infinite-scroll/actions"><img alt="GitHub Workflow Status (master)" src="https://github.com/codelabmw/laravel-infinite-scroll/actions/workflows/run-tests.yml/badge.svg?branch=main"></a>
         <a href="https://packagist.org/packages/codelabmw/laravel-infinite-scroll"><img alt="Total Downloads" src="https://img.shields.io/packagist/dt/codelabmw/laravel-infinite-scroll"></a>
         <a href="https://packagist.org/packages/codelabmw/laravel-infinite-scroll"><img alt="Latest Version" src="https://img.shields.io/packagist/v/codelabmw/laravel-infinite-scroll"></a>
         <a href="https://packagist.org/packages/codelabmw/laravel-infinite-scroll"><img alt="License" src="https://img.shields.io/packagist/l/codelabmw/laravel-infinite-scroll"></a>
