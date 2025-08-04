@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Codelabmw\InfiniteScroll\Stacks;
 
 use Codelabmw\InfiniteScroll\Contracts\Stack;
+use Codelabmw\InfiniteScroll\Support\FileSystem;
 use Illuminate\Support\Collection;
 
 final class React implements Stack
@@ -32,6 +33,8 @@ final class React implements Stack
      */
     public function getStubs(): Collection
     {
-        return Collection::make();
+        return Collection::make([
+            FileSystem::stubs('components/react/ts/infinite-scroll.tsx'),
+        ]);
     }
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Codelabmw\InfiniteScroll\Console\Commands;
 
 use Codelabmw\InfiniteScroll\Contracts\Stack;
+use Codelabmw\InfiniteScroll\Support\FileSystem;
 use Codelabmw\InfiniteScroll\SupportedStacks;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
@@ -63,13 +64,14 @@ final class InstallCommand extends Command
         /** @var Stack */
         $stack = App::make((string) $this->supportedStacks->get($stack));
 
+        // @phpstan-ignore-next-line
         $installationPath = text(
             label: 'Where do you want to install components?',
             placeholder: $stack->getDefaultInstallationPath(),
-            required: true,
-        );
+            required: false,
+        ) ?? $stack->getDefaultInstallationPath();
 
-        $error = spin(fn (): ?string => $this->install($stack->getStubs()), 'Installing infinite scroll components for '.$stack->getLabel().' in '.$installationPath.'.');
+        $error = spin(fn (): ?string => $this->install($stack->getStubs(), $installationPath), 'Installing infinite scroll components for '.$stack->getLabel().' in '.$installationPath.'.');
 
         if ($error) {
             error('Error occurred while installing components. '.$error);
@@ -89,21 +91,38 @@ final class InstallCommand extends Command
      *
      * @param  Collection<int, string>  $stubs
      */
-    private function install(Collection $stubs): ?string
+    private function install(Collection $stubs, string $destination): ?string
     {
         if ($stubs->isEmpty()) {
             return 'Installation files were not found.';
         }
 
         $error = null;
+
         $stubs->each(function (string $file) use (&$error): void {
-            if (! file_exists($file)) {
+            if (! FileSystem::exists($file)) {
                 $error = 'The file: '.$file.' does not exists.';
 
                 return;
             }
         });
 
-        return $error;
+        if ($error !== null) {
+            return $error;
+        }
+
+        FileSystem::ensureDirectoryExists($destination);
+
+        $stubs->each(function (string $file) use ($destination): void {
+            $destinationFile = $destination.'/'.basename($file);
+
+            if (FileSystem::exists($destinationFile)) {
+                return;
+            }
+
+            FileSystem::copy($file, $destinationFile);
+        });
+
+        return null;
     }
 }
