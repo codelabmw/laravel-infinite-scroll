@@ -186,7 +186,7 @@ Publishes infinite scroll components of your chosen stack to your resources dire
   - A: Use component props (`whileLoading` | `whileNoMoreData`) to override default behavior.
   - A: Edit the published component in your resources directory or where you published it.
 - **Q: Does this work with other stacks?**
-  - A: Yes it does, however currently, only React components are included out of the box. You can add other stacks components by contributing to the package.
+  - A: Yes it does, however currently, only React components are included out of the box. You can add other stacks components by contributing to the package or directly in your project from scratch.
 
 ---
 
