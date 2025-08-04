@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Codelabmw\InfiniteScroll;
 
 use Codelabmw\InfiniteScroll\Enums\PaginationType;
-use Illuminate\Contracts\Pagination\CursorPaginator;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Pagination\CursorPaginator;
 use Inertia\Inertia;
 
 final class InfiniteScroll
@@ -40,7 +40,7 @@ final class InfiniteScroll
             $key => Inertia::defer(fn () => $data)->deepMerge(),
             'type' => fn (): PaginationType => PaginationType::CURSOR,
             'cursor' => fn () => $data->nextCursor()?->encode(),
-            'has_more' => fn () => $data->hasMorePages(), // @phpstan-ignore-line method.notFound
+            'has_more' => fn () => $data->hasMorePages(),
             'per_page' => fn (): int => $perPage,
         ];
     }
