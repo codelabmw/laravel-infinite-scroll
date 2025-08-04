@@ -15,7 +15,7 @@ final class React implements Stack
      */
     public function getLabel(): string
     {
-        return 'React';
+        return 'React-TS';
     }
 
     /**

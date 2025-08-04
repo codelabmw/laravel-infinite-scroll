@@ -32,12 +32,12 @@ afterEach(function (): void {
     }
 });
 
-test('getLabel returns React', function (): void {
+test('getLabel returns React-TS', function (): void {
     // Act
     $label = $this->react->getLabel();
 
     // Assert
-    expect($label)->toBe('React');
+    expect($label)->toBe('React-TS');
 });
 
 test('getDefaultInstallationPath returns expected path', function (): void {
